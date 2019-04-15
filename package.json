@@ -1,0 +1,23 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chd830/Chat.git"
+  },
+  "author": "chong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chd830/Chat/issues"
+  },
+  "homepage": "https://github.com/chd830/Chat#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  }
+}

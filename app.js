@@ -26,8 +26,6 @@ app.get('/', function(request, response) {
             response.end()
         }
     })
-    console.log('user login')
-    response.send('Hello Express Server')
 }) 
 
 server.listen(8080, function() {

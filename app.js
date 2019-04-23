@@ -1,4 +1,4 @@
-///* jslint devel: true */
+/* jslint devel: true */
 //const express = require('express')
 //
 //const socket = require('socket.io')

@@ -5,13 +5,31 @@
         <title>Chatting</title>
         <link rel="stylesheet" href="/css/index.css">
         <script src = "/socket.io/socket.io.js"></script>
+        <script src = "https://code.jquery.com/jquery-1.11.1.js"></scrip>
         <script src = "/js/index.js"></script>
     </head>
-    <body>
-        <div id = "main">
-            <input type="text" id="test">
-            <button onclick="send()">SEND</button>
-        </div>
-    </body>
+<body>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete=”off”></input>
+            <button>Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(() => {
+        const socket = io();
+        $('form').submit(() => {
+          socket.emit('chat message', $('#m').val());
+          $('#m').val('');
+          return false;
+        });
+
+        socket.on('chat message', (msg) => {
+          $('#messages').append($('<li>').text(msg));
+        });
+      });
+    </script>
+  </body>
     
 </html>

@@ -123,6 +123,6 @@ namespace1.on('connection', (socket) => {
 const namespace2= io.of('/namespace2');
 
 // connection을 받으면, news 이벤트에 hello 객체를 담아 보낸다
-namespace1.on('connection', (socket) => {
+namespace2.on('connection', (socket) => {
   namespace1.emit('news', { hello: "Someone connected at namespace2" });
 });

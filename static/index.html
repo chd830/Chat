@@ -1,35 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset = "utf-8">
-        <title>Chatting</title>
-        <link rel="stylesheet" href="/css/index.css">
-        <script src = "/socket.io/socket.io.js"></script>
-        <script src = "https://code.jquery.com/jquery-1.11.1.js"></scrip>
-        <script src = "/js/index.js"></script>
-    </head>
-<body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete=”off”></input>
-            <button>Send</button>
-    </form>
+  <head>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      $(() => {
-        const socket = io();
-        $('form').submit(() => {
-          socket.emit('chat message', $('#m').val());
-          $('#m').val('');
-          return false;
+      function namespace(nsp) {
+        const namespace = io('/namespace' + nsp);
+          // news라는 이벤트를 받을 시 콘솔에 data.hello를 출력
+          namespace.on('news', (data) => {
+          console.log(data.hello);
         });
-
-        socket.on('chat message', (msg) => {
-          $('#messages').append($('<li>').text(msg));
-        });
-      });
+      }
     </script>
+  </head>
+  <body>
+    <button onclick="namespace(1)">namespace1</button>
+    <div></div>
+    <button onclick="namespace(2)">namespace2</button>
   </body>
-    
 </html>

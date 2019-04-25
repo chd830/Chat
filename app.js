@@ -82,6 +82,62 @@
 ////  namespace1.emit('news', { hello: "Someone connected at namespace2" });
 ////});
 //
+const app = require('express')();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const fs = require('fs');
+
+//app.set('view engine', 'html');
+//app.set('views', '/static');
+
+let room = ['room1', 'room2'];
+let a = 0;
+
+//app.get('/', (req, res) => {
+//    res.render('index');
+//});
+
+/*외부클라이언트가 /css, /js경로로 액세스 가능*/
+
+app.get('/', function(request, response) {
+    fs.readFile('./views/chat.ejs', function(err, data) {
+        if(err) {
+            response.send('error')
+        } else {
+            response.writeHead(200, { 'Content-Type': 'text/html' })
+            response.write(data)
+            response.end()
+        }
+    })
+}) 
+
+io.on('connection', (socket) => {
+      socket.on('disconnect', () => {
+          console.log('user disconnected');
+      });
+    socket.on('leaveRoom', (num, name) => {
+        socket.leave(room[num], () => {
+            console.log(name + ' leave a ' + room[num]);
+            io.to(room[num]).emit('leaveRoom', num, name);
+        });
+    });
+    socket.on('joinRoom', (num, name) => {
+        socket.join(room[num], () => {
+            console.log(name + ' join a ' + room[name]);
+            io.to(room[num]).emit('joinRoom', num, name);
+        });
+    });
+    
+    socket.on('chat message', (num, name, msg) => {
+        a = num;
+        io.to(room  [a]).emit('chat message', name, msg);
+    });
+});
+
+server.listen(3000, () => {
+    console.log('connect at 3000');
+})
+
 //const app = require('express')();
 //const server = require('http').Server(app);
 //const io = require('socket.io')(server);
@@ -97,70 +153,29 @@
 //});
 //
 //io.on('connection', (socket) => {
-//      socket.on('disconnect', () => {
-//          console.log('user disconnected');
-//      });
+//    socket.on('disconnect', () => {
+//        console.log('user disconnected');
+//    });
 //    socket.on('leaveRoom', (num, name) => {
 //        socket.leave(room[num], () => {
-//            console.log(name + ' leave a ' + room[num]);
+//            console.log(name + 'leave a ' + room[num]);
 //            io.to(room[num]).emit('leaveRoom', num, name);
 //        });
 //    });
+//    
 //    socket.on('joinRoom', (num, name) => {
 //        socket.join(room[num], () => {
-//            console.log(name + ' join a ' + room[name]);
+//            console.log(name + 'join a' + room[num]);
 //            io.to(room[num]).emit('joinRoom', num, name);
 //        });
 //    });
 //    
-//    socket.on('chat message', (num, name, msg) => {
+//    socket.on('chatMessage', (num, name, msg) => {
 //        a = num;
-//        io.to(room  [a]).emit('chat message', name, msg);
+//        io.to(room[a]).emit('chatMessage', name, msg);
 //    });
 //});
 //
 //server.listen(3000, () => {
-//    console.log('connect at 3000');
+//    console.log('Connect at 3000');
 //})
-
-const app = require('express')();
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
-
-app.set('view engine', 'ejs');
-app.set('views', '/views');
-
-let room = ['room1', 'room2'];
-let a = 0;
-
-app.get('/', (req, res) => {
-    res.render('chat');
-});
-
-io.on('connection', (socket) => {
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
-    socket.on('leaveRoom', (num, name) => {
-        socket.leave(room[num], () => {
-            console.log(name + 'leave a ' + room[num]);
-            io.to(room[num]).emit('leaveRoom', num, name);
-        });
-    });
-    
-    socket.on('joinRoom', (num, name) => {
-        socket.join(room[num], () => {
-            console.log(name + 'join a' + room[num]);
-            io.to(room[num]).emit('joinRoom', num, name);
-        });
-    });
-    
-    socket.on('chatMessage', (num, name, msg) => {
-        a = num;
-        io.to(room[a]).emit('chatMessage', name, msg);
-    });
-});
-
-server.listen(3000, () => {
-    console.log('Connect at 3000');
-})

@@ -82,11 +82,14 @@
 ////  namespace1.emit('news', { hello: "Someone connected at namespace2" });
 ////});
 //
-const app = require('express')();
+const express = require('express');
+const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const fs = require('fs');
 
+app.use('/css', express.static('./static/css'));
+app.use('/js', express.static('./static/js'));
 //app.set('view engine', 'html');
 //app.set('views', '/static');
 
@@ -100,7 +103,7 @@ let a = 0;
 /*외부클라이언트가 /css, /js경로로 액세스 가능*/
 
 app.get('/', function(request, response) {
-    fs.readFile('./views/chat.ejs', function(err, data) {
+    fs.readFile('./static/index.html', function(err, data) {
         if(err) {
             response.send('error')
         } else {

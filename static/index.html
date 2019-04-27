@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="/css/index.css">
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-      function namespace(nsp) {
-        const namespace = io('/namespace' + nsp);
-          // news라는 이벤트를 받을 시 콘솔에 data.hello를 출력
-          namespace.on('news', (data) => {
-          console.log(data.hello);
-        });
-      }
-    </script>
+      <script src="/js/index.js"></script>
   </head>
   <body>
-    <button onclick="namespace(1)">namespace1</button>
-    <div></div>
-    <button onclick="namespace(2)">namespace2</button>
+      <div id="main">
+          <input type="text" id="test">
+          <button onclick="send()">Send</button>
+      </div>
   </body>
 </html>

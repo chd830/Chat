@@ -64,12 +64,26 @@ app.get('/', function(request, response) {
 
 io.on('connection', function(socket) {
     
-      socket.on('disconnect', function() {
-          console.log('user disconnected');
-      });
-    socket.on('send', function(data) {
-        console.log('sended data:', data.msg);
+    socket.on('newUser', function(name) {
+        console.log(name + ' user connected');
+        socket.name = name
+        io.emit('update', {type: 'connect', name: 'SERVER', message: name + ' user connected'});
+    })
+    
+//    socket.on('send', function(data) {
+//        console.log('sended data:', data.msg);
+//    });
+    
+    socket.on('message', function(data) {
+        data.name = socket.name;
+        console.log(data);
+        socket.broadcast.emit('update', data);
     });
+    
+    socket.on('disconnect', function() {
+        console.log(socket.name + ' user disconnected');
+        socket.broadcast,emit('update', {type: 'disconnect', name: 'SERVER', message: socket.name + ' user disconnected'});
+      });
     
 //    socket.on('leaveRoom', function(num, name) {
 //        socket.leave(room[num], function() {

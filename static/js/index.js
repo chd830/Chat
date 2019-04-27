@@ -1,11 +1,21 @@
 var socket = io();
 
 socket.on('connect', function() {
-    /* 접속 되었을 때 실행*/
-    var input = document.getElementById('test')
-    input.value = 'LogIn'
+//    /* 접속 되었을 때 실행*/
+//    var input = document.getElementById('test')
+//    input.value = 'LogIn'
+    var name = prompt('Hello!', '');
+    
+    if(!name) {
+        name = 'unnamed';
+    }
+    socket.emit('newUser', name);
+});
+socket.on('update', function(data) {
+    var message = document.getElementById('test').value;
+    document.getElementById('test').value='';
+    socket.emit('message', {type: 'message', message: message});
 })
-
 function send() {
     var message = document.getElementById('test').value
     /* 입력되어 있는 데이터 가져오기*/

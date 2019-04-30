@@ -51,7 +51,8 @@ let a = 0;
 /*외부클라이언트가 /css, /js경로로 액세스 가능*/
 
 app.get('/', function(request, response) {
-    fs.readFile('./views/chat.ejs', function(err, data) {
+//    fs.readFile('./views/chat.ejs', function(err, data) {
+    fs.readFile('./static/index.html', function(err, data) {
         if(err) {
             response.send('error')
         } else {
@@ -69,6 +70,7 @@ io.on('connection', function(socket) {
         socket.name = name
         io.emit('update', {type: 'connect', name: 'SERVER', message: name + ' user connected'});
     })
+    //새로운 유저가 들어오는 것을 알려줌.
     
     socket.on('send', function(data) {
         console.log('sended data:', data.msg);

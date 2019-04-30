@@ -32,7 +32,7 @@
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const io = require('socket.io').listen(server);
 const fs = require('fs');
 
 app.use('/css', express.static('./static/css'));
@@ -82,7 +82,7 @@ io.on('connection', function(socket) {
     
     socket.on('disconnect', function() {
         console.log(socket.name + ' user disconnected');
-        socket.broadcast,emit('update', {type: 'disconnect', name: 'SERVER', message: socket.name + ' user disconnected'});
+        socket.broadcast.emit('update', {type: 'disconnect', name: 'SERVER', message: socket.name + ' user disconnected'});
       });
     
 //    socket.on('leaveRoom', function(num, name) {
@@ -107,45 +107,3 @@ io.on('connection', function(socket) {
 server.listen(3000, function() {
     console.log('connect at 3000');
 })
-
-//const app = require('express')();
-//const server = require('http').Server(app);
-//const io = require('socket.io')(server);
-//
-//app.set('view engine', 'ejs');
-//app.set('views', '/views');
-//
-//let room = ['room1', 'room2'];
-//let a = 0;
-//
-//app.get('/', (req, res) => {
-//    res.render('chat');
-//});
-//
-//io.on('connection', (socket) => {
-//    socket.on('disconnect', () => {
-//        console.log('user disconnected');
-//    });
-//    socket.on('leaveRoom', (num, name) => {
-//        socket.leave(room[num], () => {
-//            console.log(name + 'leave a ' + room[num]);
-//            io.to(room[num]).emit('leaveRoom', num, name);
-//        });
-//    });
-//    
-//    socket.on('joinRoom', (num, name) => {
-//        socket.join(room[num], () => {
-//            console.log(name + 'join a' + room[num]);
-//            io.to(room[num]).emit('joinRoom', num, name);
-//        });
-//    });
-//    
-//    socket.on('chatMessage', (num, name, msg) => {
-//        a = num;
-//        io.to(room[a]).emit('chatMessage', name, msg);
-//    });
-//});
-//
-//server.listen(3000, () => {
-//    console.log('Connect at 3000');
-//})

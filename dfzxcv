@@ -1,0 +1,83 @@
+[33mcommit 007befcbd2f3af07926d4807b21604aa8526ccc1[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m)[m
+Author: chong <chd830@naver.com>
+Date:   Sat Apr 27 23:08:23 2019 +0900
+
+    이름입력하기 됨. 채팅 아직안됨
+
+[33mcommit a4bb8d8aa63f520f0b226785c13e2f41f9d1920e[m
+Author: chong <chd830@naver.com>
+Date:   Sat Apr 27 22:34:22 2019 +0900
+
+    채팅한 내용 서버로 보내기
+
+[33mcommit e72703dddec6374050efcfb07c9e1c46d78109b3[m
+Author: chong <chd830@naver.com>
+Date:   Sat Apr 27 22:24:14 2019 +0900
+
+     =>를 function()으로 바꾸기
+
+[33mcommit 84f7445197eae3971dd3e4565044d6f33cb130b3[m
+Author: chong <chd830@naver.com>
+Date:   Thu Apr 25 23:13:19 2019 +0900
+
+    채팅방 완성, fs로 파일 읽어내는 방법말고 res.render사용하여 해보기
+
+[33mcommit 37fbb8413f42e0a49ab567cb9af6d3640f879357[m
+Author: chong <chd830@naver.com>
+Date:   Thu Apr 25 22:32:24 2019 +0900
+
+    socket.io인식 안되는 점 해결
+
+[33mcommit 0cf088b71d690c66a7b8b4ce58ed407ca7f19d24[m
+Author: chong <chd830@naver.com>
+Date:   Wed Apr 24 16:14:48 2019 +0900
+
+    ejs사용하기 더 수정필요
+
+[33mcommit 061eb61582b578bd04e7f336b424697fdd16314b[m
+Author: chong <chd830@naver.com>
+Date:   Wed Apr 24 13:55:48 2019 +0900
+
+    namespace1, 2가 중복되던것 변경
+
+[33mcommit fe4d0559f5f4e306f2df3d21519123a536421531[m
+Author: chong <chd830@naver.com>
+Date:   Wed Apr 24 13:54:37 2019 +0900
+
+    namespace socket으로 나누기
+
+[33mcommit ed69baa218288f7bcf6688ee70dd46e9dd5ef9d1[m
+Author: chong <chd830@naver.com>
+Date:   Wed Apr 24 00:04:23 2019 +0900
+
+    send로 내가 채팅 보내기 완료
+
+[33mcommit ab57c33390b8336b01f1dcfc51cdca0c7baadba2[m
+Author: chong <chd830@naver.com>
+Date:   Tue Apr 23 22:45:52 2019 +0900
+
+    index.html방식 바꿈
+
+[33mcommit c5398eae88d19a6b186302d68e59c2ecea8160d3[m
+Author: chong <chd830@naver.com>
+Date:   Tue Apr 23 19:51:59 2019 +0900
+
+    response가 중복되어 생기는 오류 해결
+
+[33mcommit d746321d6f86aef19957214ccd8e7d40f1f14c52[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: chong <chd830@naver.com>
+Date:   Mon Apr 15 23:28:38 2019 +0900
+
+    js,css못읽는 오류 있음
+
+[33mcommit 1f66c3bcd3a2c5e4938e60fe8ffba423122a49e3[m
+Author: chong <chd830@naver.com>
+Date:   Mon Apr 15 23:01:56 2019 +0900
+
+    8080으로 server실행
+
+[33mcommit 2b05838cb04c825f72c68c08fbf97544c1ef13de[m
+Author: chong <chd830@naver.com>
+Date:   Mon Apr 15 22:52:30 2019 +0900
+
+    first

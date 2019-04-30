@@ -51,7 +51,7 @@ let a = 0;
 /*외부클라이언트가 /css, /js경로로 액세스 가능*/
 
 app.get('/', function(request, response) {
-    fs.readFile('./static/index.html', function(err, data) {
+    fs.readFile('./views/chat.ejs', function(err, data) {
         if(err) {
             response.send('error')
         } else {
@@ -70,9 +70,9 @@ io.on('connection', function(socket) {
         io.emit('update', {type: 'connect', name: 'SERVER', message: name + ' user connected'});
     })
     
-//    socket.on('send', function(data) {
-//        console.log('sended data:', data.msg);
-//    });
+    socket.on('send', function(data) {
+        console.log('sended data:', data.msg);
+    });
     
     socket.on('message', function(data) {
         data.name = socket.name;
@@ -85,23 +85,23 @@ io.on('connection', function(socket) {
         socket.broadcast.emit('update', {type: 'disconnect', name: 'SERVER', message: socket.name + ' user disconnected'});
       });
     
-//    socket.on('leaveRoom', function(num, name) {
-//        socket.leave(room[num], function() {
-//            console.log(name + ' leave a ' + room[num]);
-//            io.to(room[num]).emit('leaveRoom', num, name);
-//        });
-//    });
-//    socket.on('joinRoom', function(num, name) {
-//        socket.join(room[num], function() {
-//            console.log(name + ' join a ' + room[name]);
-//            io.to(room[num]).emit('joinRoom', num, name);
-//        });
-//    });
-//    
-//    socket.on('chat message', function(num, name, msg) {
-//        a = num;
-//        io.to(room[a]).emit('chat message', name, msg);
-//    });
+    socket.on('leaveRoom', function(num, name) {
+        socket.leave(room[num], function() {
+            console.log(name + ' leave a ' + room[num]);
+            io.to(room[num]).emit('leaveRoom', num, name);
+        });
+    });
+    socket.on('joinRoom', function(num, name) {
+        socket.join(room[num], function() {
+            console.log(name + ' join a ' + room[name]);
+            io.to(room[num]).emit('joinRoom', num, name);
+        });
+    });
+    
+    socket.on('chat message', function(num, name, msg) {
+        a = num;
+        io.to(room[a]).emit('chat message', name, msg);
+    });
 });
 
 server.listen(3000, function() {

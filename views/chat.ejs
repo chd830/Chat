@@ -54,11 +54,14 @@
   <option value="Room1">Room1</option>
   <option value="Room2">Room2</option>
 </select>
+    
 <ul id="messages"></ul>
+    
 <form action="">
   <input id="m" autocomplete="off"/>
   <button>Send</button>
 </form>
+    
 <script src="/socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
@@ -70,7 +73,7 @@
 
     socket.emit('joinRoom', num, name);
 
-    $('select').change(() => {
+    $('select').change(function() {
       socket.emit('leaveRoom', num, name);
       num++;
       num = num % 2;
@@ -78,23 +81,23 @@
     });
 
 
-    $('form').submit(() => {
+    $('form').submit(function() {
       socket.emit('chat message', num, name, $('#m').val());
       $('#m').val('');
       return false;
     });
 
-    socket.on('chat message', (name, msg) => {
+    socket.on('chat message', function(name, msg) {
       $('#messages').append($('<li>').text(name + '  :  ' +
         msg));
     });
 
-    socket.on('leaveRoom', (num, name) => {
+    socket.on('leaveRoom', function(num, name) {
       $('#messages').append($('<li>').text(name + '    leaved '
         + room[num] + ' :('));
     });
 
-    socket.on('joinRoom', (num, name) => {
+    socket.on('joinRoom', function(num, name) {
       $('#messages').append($('<li>').text(name + '    joined '
         + room[num] + ':)'));
     });

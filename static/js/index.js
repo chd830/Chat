@@ -25,12 +25,12 @@
     
     socket.emit('joinRoom', num, name);
 
-    $('#room').change(function() {
+    function changeSelect() {
       socket.emit('leaveRoom', num, name);
-      num++;
+      num = num + 1;
       num = num % 2;
-      socket.emit('joinRoom', num, name);
-    });
+      socket.emit('joinRoom', num, name);  
+    }
 
     function buttonClick() {
       socket.emit('chat message', num, name, $('#m').val());

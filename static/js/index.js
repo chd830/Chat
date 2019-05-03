@@ -25,19 +25,20 @@
     
     socket.emit('joinRoom', num, name);
 
-    $('select').change(function() {
+    $('#room').change(function() {
       socket.emit('leaveRoom', num, name);
       num++;
       num = num % 2;
       socket.emit('joinRoom', num, name);
     });
 
-
-    $('form').submit(function(){
+    function buttonClick() {
       socket.emit('chat message', num, name, $('#m').val());
       $('#m').val('');
       return false;
-    });
+    };
+
+   
 
     socket.on('chat message', function(name, msg) {
       $('#messages').append($('<li>').text(name + '  :  ' +
